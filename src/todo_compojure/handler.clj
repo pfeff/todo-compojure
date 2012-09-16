@@ -4,8 +4,11 @@
             [compojure.route :as route]))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/not-found "Not Found"))
+           (GET "/" [] (pr-str {:hello :world}))
+           (GET "/2" [] (let [x (+ 1 1)]
+                          (pr-str (+ 1 x))))
+           (GET "/task" [] (pr-str {:task "Write a ClojureScript webapp" :done false}))
+           (route/not-found "Not Found"))
 
 (def app
   (handler/site app-routes))
